@@ -1,14 +1,16 @@
+
 Feature: DTO向け汎用テスト（Boolean I/O）
 
 Background:
-	Given テストID："UTD001000000"
+	Given テスト対象クラスのインスタンス生成
+		And メソッドをテスト対象に指定
 
+@1arg
 Scenario Outline: 引数バリエーションテスト
-	Given "clear"により初期化
-	When "Set&Get"処理実行( <arg> )
+	When メソッド実行（パラメータ："<arg1>"）
 	Then 戻り値：<result>
 	
 	Examples:
-		|arg	|result	|
+		|arg1	|result	|
 		|true	|true	|
 		|false	|false	|

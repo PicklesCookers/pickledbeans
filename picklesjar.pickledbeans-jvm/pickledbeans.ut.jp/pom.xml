@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>Pickledbeans UT Support for Japanese language</name>
+	<name>PickledBeans UT Support for Japanese language</name>
 	<description></description>
-	<url>https://github.com/PicklesJar/pickes</url>
+	<url>https://github.com/PicklesJar/pickles</url>
 
 	<parent>
-		<groupId>jp.picklesjar</groupId>
-		<artifactId>jp.picklesjar.pickledbeans-jvm</artifactId>
+		<groupId>picklesjar</groupId>
+		<artifactId>picklesjar.pickledbeans-jvm</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>pickledbeans.ut.jp</artifactId>
@@ -36,7 +36,7 @@
 	<dependencies>
 		
 		<dependency>
-			<groupId>jp.picklesjar</groupId>
+			<groupId>picklesjar</groupId>
 			<artifactId>pickledbeans.ut</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

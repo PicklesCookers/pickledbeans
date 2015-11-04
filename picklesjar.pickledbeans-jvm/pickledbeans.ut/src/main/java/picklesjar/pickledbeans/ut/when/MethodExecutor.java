@@ -4,8 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Function;
 
-import picklesjar.pickledbeans.ut.TemporaryKey;
 import picklesjar.pickles.ut.core.IllegalTestStateException;
+import picklesjar.pickles.ut.core.TemporaryPreparedKey;
 import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
 import picklesjar.pickles.ut.runtime.UnitTestTemporary;
 
@@ -36,12 +36,12 @@ public abstract class MethodExecutor {
 			( Function< UnitTestTemporary, Object > )
 			( temp ) -> {
 				
-				Object clazz = temp.get( TemporaryKey.TEST_TARGET_CLASS_INSTANCE.name() );
+				Object clazz = temp.get( TemporaryPreparedKey.TEST_TARGET_CLASS_INSTANCE.name() );
 				if( clazz == null ) {
 					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_INSTANCE );
 				}
 				
-				Object method = temp.get( TemporaryKey.TEST_TARGET_METHOD_INSTANCE.name() );
+				Object method = temp.get( TemporaryPreparedKey.TEST_TARGET_METHOD_INSTANCE.name() );
 				if( !( method instanceof Method ) ) {
 					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_METHOD_INSTANCE );
 				}

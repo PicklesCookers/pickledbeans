@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>Pickledbeans UT Support</name>
+	<name>PickledBeans UT Support</name>
 	<description></description>
-	<url>https://github.com/PicklesJar/pickes</url>
+	<url>https://github.com/PicklesJar/pickledbeans</url>
 
 	<parent>
-		<groupId>jp.picklesjar</groupId>
-		<artifactId>jp.picklesjar.pickledbeans-jvm</artifactId>
+		<groupId>picklesjar</groupId>
+		<artifactId>picklesjar.pickledbeans-jvm</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>pickledbeans.ut</artifactId>

@@ -3,8 +3,8 @@ package picklesjar.pickledbeans.ut.given;
 import java.lang.reflect.Method;
 import java.util.function.BiConsumer;
 
-import picklesjar.pickledbeans.ut.TemporaryKey;
 import picklesjar.pickles.ut.core.IllegalTestStateException;
+import picklesjar.pickles.ut.core.TemporaryPreparedKey;
 import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
 import picklesjar.pickles.ut.runtime.UnitTestTemporary;
 
@@ -33,7 +33,7 @@ public abstract class MethodReflector {
 			( BiConsumer< UnitTestTemporary, String > )
 			( temp, _methodName ) -> {
 				
-				Object clazz = temp.get( TemporaryKey.TEST_TARGET_CLASS_OBJECT.name() );
+				Object clazz = temp.get( TemporaryPreparedKey.TEST_TARGET_CLASS_OBJECT.name() );
 				if( !( clazz instanceof Class< ? > ) ) {
 					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_OBJECT );
 				}
@@ -48,9 +48,9 @@ public abstract class MethodReflector {
 				}
 				
 				temp.put(
-					TemporaryKey.TEST_TARGET_METHOD_INSTANCE.name(), method );
+					TemporaryPreparedKey.TEST_TARGET_METHOD_INSTANCE.name(), method );
 				temp.put(
-					TemporaryKey.TEST_TARGET_METHOD_NAME.name(), _methodName );
+					TemporaryPreparedKey.TEST_TARGET_METHOD_NAME.name(), _methodName );
 				
 			}, methodName );
 		
