@@ -2,8 +2,8 @@ package picklesjar.pickledbeans.ut.given;
 
 import java.util.function.BiConsumer;
 
-import picklesjar.pickledbeans.ut.TemporaryKey;
 import picklesjar.pickles.ut.core.IllegalTestStateException;
+import picklesjar.pickles.ut.core.TemporaryPreparedKey;
 import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
 import picklesjar.pickles.ut.runtime.UnitTestTemporary;
 
@@ -37,9 +37,9 @@ public abstract class InstanceFactory {
 				}
 				
 				temp.put(
-					TemporaryKey.TEST_TARGET_CLASS_OBJECT.name(), result.getClass() );
+					TemporaryPreparedKey.TEST_TARGET_CLASS_OBJECT.name(), result.getClass() );
 				temp.put(
-					TemporaryKey.TEST_TARGET_CLASS_INSTANCE.name(), result );
+					TemporaryPreparedKey.TEST_TARGET_CLASS_INSTANCE.name(), result );
 				
 			}, className );
 		

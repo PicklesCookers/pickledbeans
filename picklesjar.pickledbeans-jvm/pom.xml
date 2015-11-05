@@ -3,16 +3,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>Pickles for Java</name>
+	<name>PickledBeans for Java</name>
 	<description></description>
-	<url>https://github.com/PicklesJar/pickes</url>
+	<url>https://github.com/PicklesJar/pickledbeans</url>
 
-	<groupId>jp.picklesjar</groupId>
-	<artifactId>jp.picklesjar.pickledbeans-jvm</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>picklesjar</groupId>
+	<artifactId>picklesjar.pickledbeans-jvm</artifactId>
+	<version>${project.version}</version>
 	<packaging>pom</packaging>
 
 	<properties>
+		<project.version>0.1</project.version>
 		<test.cucumber.version>1.2.2</test.cucumber.version>
 	</properties>
 
@@ -73,9 +74,9 @@
 			<version>${test.cucumber.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>jp.picklesjar</groupId>
+			<groupId>picklesjar</groupId>
 			<artifactId>pickles.ut</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 	</dependencies>
