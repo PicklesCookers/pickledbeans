@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.function.BiConsumer;
 
+import picklesjar.pickledbeans.ut.then.AsserThatResultIs;
 import picklesjar.pickles.ut.core.IllegalTestStateException;
 import picklesjar.pickles.ut.runtime.UnitTestResult;
 import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
@@ -16,8 +17,8 @@ import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
  * @author PicklesCooker
  *
  */
-public abstract class StringResultChecker
-	implements picklesjar.pickledbeans.ut.then.StringResultChecker {
+public abstract class AssertThatResultIs
+	implements picklesjar.pickledbeans.ut.then.AsserThatResultIs {
 	
 	/**
 	 * 
@@ -25,32 +26,27 @@ public abstract class StringResultChecker
 	 * 
 	 * @param key
 	 */
-	@Override
-	public void checkStringValue( String expectedValue ) {
+	protected final < T > void execute( T expectedValue ) {
 	
 		UnitTestRuntimeFoundation.then(
-			( BiConsumer< UnitTestResult, String > )
+			( BiConsumer< UnitTestResult, T > )
 			( result, _expectedValue ) -> {
 				
 				Object resultValue = null;
-				if( result.containsKey( "0" ) ) {
+				if( result.containsKey(
+					AsserThatResultIs._ResultKey.SINGLE_FUNCTION_CALL.name() ) ) {
 					
-					resultValue = result.get( "0" );
+					resultValue = result.get(
+						AsserThatResultIs._ResultKey.SINGLE_FUNCTION_CALL.name() );
 					
 				} else {
 					
-					throw new IllegalTestStateException( 1 );
+					throw new IllegalTestStateException( CODE_OF_EMPTY_ASSERT_TARGET_RESULT );
 				}
 				
-				if( resultValue instanceof String ) {
-					
-					assertThat( ( String )resultValue, is( _expectedValue ) );
-					
-				} else {
-					
-					throw new IllegalTestStateException( 2 );
-				}
+				assertThat( resultValue, is( _expectedValue ) );
 				
 			}, expectedValue );
 	}
+	
 }
