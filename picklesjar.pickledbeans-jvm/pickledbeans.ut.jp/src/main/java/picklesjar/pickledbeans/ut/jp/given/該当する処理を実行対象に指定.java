@@ -11,7 +11,7 @@ import cucumber.api.java.en.Given;
  * @author PicklesCooker
  *
  */
-public class 該当する機能を実行対象に指定
+public class 該当する処理を実行対象に指定
 	extends SetToTargetExecutionByMethodQuery {
 	
 	/**
@@ -21,7 +21,7 @@ public class 該当する機能を実行対象に指定
 	 * @param className
 	 */
 	@Override
-	@Given( "^テスト対象の機能を実行対象に指定$" )
+	@Given( "^テスト対象の処理を実行対象に指定$" )
 	public void execute() {
 	
 		try {
