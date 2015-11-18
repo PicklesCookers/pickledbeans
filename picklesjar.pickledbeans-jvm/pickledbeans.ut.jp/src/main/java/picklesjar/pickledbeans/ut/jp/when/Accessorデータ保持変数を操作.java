@@ -13,7 +13,7 @@ public class Accessorデータ保持変数を操作
 	 * 
 	 */
 	@When( "^Accessorデータ保持変数の値を取得$" )
-	public void execute() {
+	public void executeGet() {
 	
 		try {
 			super.get();
@@ -52,10 +52,54 @@ public class Accessorデータ保持変数を操作
 	}
 	
 	@When( "^Accessorデータ保持変数の値を取得、保持（alias：\"(.+?)\"）$" )
-	public void execute( String alias ) {
+	public void executeGetAndPutTo( String alias ) {
 	
 		try {
 			super.getAndPutTo( alias );
+		} catch( IllegalTestStateException exp ) {
+			
+			IllegalTestStateException wrappedExp = null;
+			switch( exp.getCode() ) {
+			
+				case CODE_OF_EMPTY_TARGET_CLASS_INSTANCE :
+					wrappedExp = new IllegalTestStateException(
+						"テスト対象クラスのインスタンスが生成されていません。", exp );
+					break;
+				
+				case CODE_OF_EMPTY_TARGET_CLASS_FUNCTION :
+					wrappedExp = new IllegalTestStateException(
+						"処理を参照できませんでした。", exp );
+					break;
+				
+				case CODE_OF_EMPTY_OR_ILLEGAL_TARGET_STEREOTYPE_DESIGN :
+					wrappedExp = new IllegalTestStateException(
+						"処理対象のデザイン・タイプが設定されていないか、適切ではありません。", exp );
+					break;
+				
+				case CODE_OF_FAILED_TO_LOOKUP_TARGET_VARIABLE :
+					wrappedExp = new IllegalTestStateException(
+						"Accessorデータ保持変数を検知できませんでした。", exp );
+					break;
+				
+				default :
+					wrappedExp = new IllegalTestStateException(
+						"処理に失敗しました。", exp );
+					break;
+			}
+			throw wrappedExp;
+		}
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 */
+	@When( "^Accessorデータ保持変数に値を設定（パラメータ：null）$" )
+	public void executeSet() {
+	
+		try {
+			super.set( null );
 		} catch( IllegalTestStateException exp ) {
 			
 			IllegalTestStateException wrappedExp = null;

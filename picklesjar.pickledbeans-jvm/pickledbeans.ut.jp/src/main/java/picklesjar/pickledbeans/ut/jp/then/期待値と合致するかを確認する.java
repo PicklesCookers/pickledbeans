@@ -20,6 +20,38 @@ public class 期待値と合致するかを確認する
 	 * 
 	 * @param key
 	 */
+	@Then( "^期待値（null）と合致するかを確認する$" )
+	public void execute() {
+	
+		try {
+			super.execute( null );
+		} catch( IllegalTestStateException exp ) {
+			throw new IllegalTestStateException( "テスト結果が設定されていません。", exp );
+		}
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param key
+	 */
+	@Then( "^期待値（null）と合致するかを確認する（alias：\"(.+?)\"）$" )
+	public void executeWithAlias( String alias ) {
+	
+		try {
+			super.executeWithAlias( alias, null );
+		} catch( IllegalTestStateException exp ) {
+			throw new IllegalTestStateException( "テスト結果が設定されていません。", exp );
+		}
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param key
+	 */
 	@Then( "^期待値（(true|True|TRUE|false|False|FALSE)）と合致するかを確認する$" )
 	public void execute( boolean expectedValue ) {
 	
@@ -37,10 +69,10 @@ public class 期待値と合致するかを確認する
 	 * @param key
 	 */
 	@Then( "^期待値（(true|True|TRUE|false|False|FALSE)）と合致するかを確認する（alias：\"(.+?)\"）$" )
-	public void execute( boolean expectedValue, String alias ) {
+	public void executeWithAlias( boolean expectedValue, String alias ) {
 	
 		try {
-			super.execute( alias, expectedValue );
+			super.executeWithAlias( alias, expectedValue );
 		} catch( IllegalTestStateException exp ) {
 			throw new IllegalTestStateException( "テスト結果が設定されていません。", exp );
 		}
@@ -69,10 +101,10 @@ public class 期待値と合致するかを確認する
 	 * @param key
 	 */
 	@Then( "^期待値（\"(.*?)\"）と合致するかを確認する（alias：\"(.+?)\"）$" )
-	public void execute( String expectedValue, String alias ) {
+	public void executeWithAlias( String expectedValue, String alias ) {
 	
 		try {
-			super.execute( alias, expectedValue );
+			super.executeWithAlias( alias, expectedValue );
 		} catch( IllegalTestStateException exp ) {
 			throw new IllegalTestStateException( "テスト結果が設定されていません。", exp );
 		}

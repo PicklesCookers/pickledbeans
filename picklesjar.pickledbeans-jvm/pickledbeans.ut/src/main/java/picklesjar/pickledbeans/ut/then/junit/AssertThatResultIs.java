@@ -27,7 +27,7 @@ public abstract class AssertThatResultIs
 	 */
 	protected final < T > void execute( T expectedValue ) {
 	
-		execute( "0", expectedValue );
+		executeWithAlias( "0", expectedValue );
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public abstract class AssertThatResultIs
 	 * 
 	 * @param key
 	 */
-	protected final < T > void execute( String alias, T expectedValue ) {
+	protected final < T > void executeWithAlias( String alias, T expectedValue ) {
 	
 		UnitTestRuntimeFoundation.then(
 			( BiConsumer< UnitTestResult, T > )
