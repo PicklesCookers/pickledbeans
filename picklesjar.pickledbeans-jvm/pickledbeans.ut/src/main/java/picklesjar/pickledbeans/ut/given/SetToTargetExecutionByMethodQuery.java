@@ -1,7 +1,9 @@
 package picklesjar.pickledbeans.ut.given;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+import java.util.function.Function;
+
+import javax.annotation.Nonnull;
 
 import picklesjar.pickles.ut.core.IllegalMethodQueryException;
 import picklesjar.pickles.ut.core.IllegalTestCodeStateException;
@@ -31,86 +33,83 @@ public abstract class SetToTargetExecutionByMethodQuery {
 	 * 
 	 * 
 	 * 
-	 * @param className
 	 */
-	protected void execute() {
+	protected final void execute() {
 	
 		UnitTestRuntimeFoundation.given(
-			( Consumer< UnitTestTemporary > )
+			( BiConsumer< UnitTestTemporary, Function< UnitTestTemporary, MethodQuery > > )this::execute,
 			( temp ) -> {
-				
-				Class< ? > targetClass = null;
+				MethodQuery result = null;
 				try {
-					targetClass = PreparedTemporaryKey.TEST_TARGET_CLASS_OBJECT.valueOf( temp );
-				} catch( ClassCastException exp ) {
-					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_OBJECT, exp );
-				}
-				
-				MethodQuery methodQuery = null;
-				try {
-					methodQuery = PreparedTemporaryKey.TEST_TARGET_METHOD_QUERY.valueOf( temp );
+					result = PreparedTemporaryKey.TEST_TARGET_METHOD_QUERY.valueOf( temp );
 				} catch( ClassCastException exp ) {
 					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_METHOD_QUERY, exp );
 				}
-				
-				ClassFunctionTarget target = null;
-				try {
-					target = new ClassFunctionTarget( targetClass, methodQuery );
-				} catch(
-					IllegalTestCodeStateException | SecurityException exp ) {
-					
-					throw new IllegalTestStateException( CODE_OF_FAILED_TO_SEARCH_METHOD, exp );
-				}
-				
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_CLASS_FUNCTION.name(), target );
-				
+				return result;
 			} );
-		
 	}
 	
 	/**
 	 * 
 	 * 
 	 * 
-	 * @param className
+	 * @param methodQuery
 	 */
-	protected void execute( String methodQuery ) {
+	protected final void execute( String methodQuery ) {
 	
-		UnitTestRuntimeFoundation.given(
-			( BiConsumer< UnitTestTemporary, String > )
-			( temp, _methodQuery ) -> {
-				
-				Class< ? > targetClass = null;
-				try {
-					targetClass = PreparedTemporaryKey.TEST_TARGET_CLASS_OBJECT.valueOf( temp );
-				} catch( ClassCastException exp ) {
-					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_OBJECT, exp );
-				}
-				
-				MethodQuery query = null;
-				try {
-					query = MethodQuery.newInstance( _methodQuery );
-				} catch( IllegalMethodQueryException exp ) {
-					throw new IllegalTestStateException( CODE_OF_FAILED_TO_SEARCH_METHOD, exp );
-				}
-				
-				ClassFunctionTarget target = null;
-				try {
-					target = new ClassFunctionTarget( targetClass, query );
-				} catch(
-					IllegalTestCodeStateException | SecurityException exp ) {
-					
-					throw new IllegalTestStateException( CODE_OF_FAILED_TO_SEARCH_METHOD, exp );
-				}
-				
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_METHOD_QUERY.name(), query );
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_CLASS_FUNCTION.name(), target );
-				
-			}, methodQuery );
+		MethodQuery query = null;
+		try {
+			query = MethodQuery.newInstance( methodQuery );
+		} catch( IllegalMethodQueryException exp ) {
+			throw new IllegalTestStateException( CODE_OF_FAILED_TO_SEARCH_METHOD, exp );
+		}
 		
+		UnitTestRuntimeFoundation.given(
+			( BiConsumer< UnitTestTemporary, MethodQuery > )this::execute, query );
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param temp
+	 * @param function
+	 */
+	private final void execute(
+		UnitTestTemporary temp, @Nonnull Function< UnitTestTemporary, MethodQuery > function ) {
+	
+		execute( temp, function.apply( temp ) );
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param temp
+	 * @param methodQuery
+	 */
+	private final void execute( UnitTestTemporary temp, MethodQuery methodQuery ) {
+	
+		Class< ? > targetClass = null;
+		try {
+			targetClass = PreparedTemporaryKey.TEST_TARGET_CLASS_OBJECT.valueOf( temp );
+		} catch( ClassCastException exp ) {
+			throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_OBJECT, exp );
+		}
+		
+		ClassFunctionTarget target = null;
+		try {
+			target = new ClassFunctionTarget( targetClass, methodQuery );
+		} catch(
+			IllegalTestCodeStateException | SecurityException exp ) {
+			
+			throw new IllegalTestStateException( CODE_OF_FAILED_TO_SEARCH_METHOD, exp );
+		}
+		
+		temp.put(
+			PreparedTemporaryKey.TEST_TARGET_METHOD_QUERY.name(), methodQuery );
+		temp.put(
+			PreparedTemporaryKey.TEST_TARGET_CLASS_FUNCTION.name(), target );
 	}
 	
 }

@@ -23,17 +23,6 @@ public abstract class AssertThatResultIs
 	 * 
 	 * 
 	 * 
-	 * @param expectedValue
-	 */
-	protected final < T > void execute( T expectedValue ) {
-	
-		executeWithAlias( "0", expectedValue );
-	}
-	
-	/**
-	 * 
-	 * 
-	 * 
 	 * @param key
 	 */
 	protected final < T > void executeWithAlias( String alias, T expectedValue ) {

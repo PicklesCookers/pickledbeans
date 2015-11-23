@@ -1,7 +1,9 @@
 package picklesjar.pickledbeans.ut.given;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+import java.util.function.Function;
+
+import javax.annotation.Nonnull;
 
 import picklesjar.pickles.ut.core.IllegalTestStateException;
 import picklesjar.pickles.ut.core.PreparedTemporaryKey;
@@ -21,36 +23,20 @@ public abstract class CreateClassInstance {
 	 * 
 	 * 
 	 * 
-	 * @param className
 	 */
-	protected void execute() {
+	protected final void execute() {
 	
 		UnitTestRuntimeFoundation.given(
-			( Consumer< UnitTestTemporary > )
+			( BiConsumer< UnitTestTemporary, Function< UnitTestTemporary, String > > )this::execute,
 			( temp ) -> {
-				
-				String className = null;
+				String result = null;
 				try {
-					className = PreparedTemporaryKey.TEST_TARGET_CLASS_FULLNAME.valueOf( temp );
+					result = PreparedTemporaryKey.TEST_TARGET_CLASS_FULLNAME.valueOf( temp );
 				} catch( ClassCastException exp ) {
 					throw new IllegalTestStateException( 1, exp );
 				}
-				
-				Object result = null;
-				
-				try {
-					result = Class.forName( className ).newInstance();
-				} catch( ReflectiveOperationException exp ) {
-					throw new IllegalTestStateException( exp );
-				}
-				
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_CLASS_OBJECT.name(), result.getClass() );
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_CLASS_INSTANCE.name(), result );
-				
+				return result;
 			} );
-		
 	}
 	
 	/**
@@ -59,28 +45,47 @@ public abstract class CreateClassInstance {
 	 * 
 	 * @param className
 	 */
-	protected void execute( String className ) {
+	protected final void execute( String className ) {
 	
 		UnitTestRuntimeFoundation.given(
-			( BiConsumer< UnitTestTemporary, String > )
-			( temp, _className ) -> {
-				
-				Object result = null;
-				
-				try {
-					result = Class.forName( _className ).newInstance();
-				} catch( ReflectiveOperationException exp ) {
-					throw new IllegalTestStateException( exp );
-				}
-				
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_CLASS_FULLNAME.name(), _className );
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_CLASS_OBJECT.name(), result.getClass() );
-				temp.put(
-					PreparedTemporaryKey.TEST_TARGET_CLASS_INSTANCE.name(), result );
-				
-			}, className );
-		
+			( BiConsumer< UnitTestTemporary, String > )this::execute, className );
 	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param temp
+	 * @param function
+	 */
+	private final void execute(
+		UnitTestTemporary temp, @Nonnull Function< UnitTestTemporary, String > function ) {
+	
+		execute( temp, function.apply( temp ) );
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param temp
+	 * @param className
+	 */
+	private final void execute( UnitTestTemporary temp, String className ) {
+	
+		Object result = null;
+		try {
+			result = Class.forName( className ).newInstance();
+		} catch( ReflectiveOperationException exp ) {
+			throw new IllegalTestStateException( exp );
+		}
+		
+		temp.put(
+			PreparedTemporaryKey.TEST_TARGET_CLASS_FULLNAME.name(), className );
+		temp.put(
+			PreparedTemporaryKey.TEST_TARGET_CLASS_OBJECT.name(), result.getClass() );
+		temp.put(
+			PreparedTemporaryKey.TEST_TARGET_CLASS_INSTANCE.name(), result );
+	}
+	
 }

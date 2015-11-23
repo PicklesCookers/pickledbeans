@@ -3,6 +3,7 @@ package picklesjar.pickledbeans.ut.when;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
+import picklesjar.pickledbeans.ut.then.AsserThatResultIs;
 import picklesjar.pickles.ut.core.IllegalTestStateException;
 import picklesjar.pickles.ut.core.PreparedTemporaryKey;
 import picklesjar.pickles.ut.core.util.ClassFunctionTarget;
@@ -34,43 +35,10 @@ public abstract class ExecuteTargetingFunction {
 	protected final void execute( Object... args ) {
 	
 		UnitTestRuntimeFoundation.when(
-			
 			( BiConsumer< UnitTestResult, UnitTestTemporary > )
 			( result, temp ) -> {
-				
-				Object instance = null;
-				try {
-					instance = PreparedTemporaryKey.TEST_TARGET_CLASS_INSTANCE.getValueFrom( temp );
-				} catch( ClassCastException exp ) {
-					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_INSTANCE, exp );
-				}
-				
-				ClassFunctionTarget target = null;
-				try {
-					target = PreparedTemporaryKey.TEST_TARGET_CLASS_FUNCTION.valueOf( temp );
-				} catch( ClassCastException exp ) {
-					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_INSTANCE, exp );
-				}
-				
-				try {
-					target.execute( instance, args );
-				} catch( Exception exp ) {
-					throw new IllegalTestStateException( CODE_OF_FAILED_TO_EXECUTE, exp );
-				}
-				
+				result.put( AsserThatResultIs.DEFAULT_RESULT_KEY, execute( temp, args ) );
 			} );
-		
-	}
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * @param args
-	 */
-	protected final void executeAndPutToResult( Object... args ) {
-	
-		executeAndPutTo( "0", args );
 	}
 	
 	/**
@@ -82,36 +50,42 @@ public abstract class ExecuteTargetingFunction {
 	 */
 	protected final void executeAndPutTo( String alias, Object... args ) {
 	
-		UnitTestRuntimeFoundation.when(
-			alias,
-			
-			( BiFunction< UnitTestTemporary, Object[], Object > )
-			( temp, _args ) -> {
-				
-				Object instance = null;
-				try {
-					instance = PreparedTemporaryKey.TEST_TARGET_CLASS_INSTANCE.getValueFrom( temp );
-				} catch( ClassCastException exp ) {
-					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_INSTANCE, exp );
-				}
-				
-				ClassFunctionTarget target = null;
-				try {
-					target = PreparedTemporaryKey.TEST_TARGET_CLASS_FUNCTION.valueOf( temp );
-				} catch( ClassCastException exp ) {
-					throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_INSTANCE, exp );
-				}
-				
-				Object result = null;
-				try {
-					result = target.execute( instance, _args );
-				} catch( Exception exp ) {
-					throw new IllegalTestStateException( CODE_OF_FAILED_TO_EXECUTE, exp );
-				}
-				
-				return result;
-			}, args );
+		UnitTestRuntimeFoundation.when( alias,
+			( BiFunction< UnitTestTemporary, Object[], Object > )this::execute, args );
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param temp
+	 * @param args
+	 * @return
+	 */
+	private final Object execute( UnitTestTemporary temp, Object... args ) {
+	
+		Object instance = null;
+		try {
+			instance = PreparedTemporaryKey.TEST_TARGET_CLASS_INSTANCE.getValueFrom( temp );
+		} catch( ClassCastException exp ) {
+			throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_CLASS_INSTANCE, exp );
+		}
 		
+		ClassFunctionTarget target = null;
+		try {
+			target = PreparedTemporaryKey.TEST_TARGET_CLASS_FUNCTION.valueOf( temp );
+		} catch( ClassCastException exp ) {
+			throw new IllegalTestStateException( CODE_OF_EMPTY_TARGET_INSTANCE, exp );
+		}
+		
+		Object result = null;
+		try {
+			result = target.execute( instance, args );
+		} catch( Exception exp ) {
+			throw new IllegalTestStateException( CODE_OF_FAILED_TO_EXECUTE, exp );
+		}
+		
+		return result;
 	}
 	
 }
