@@ -5,9 +5,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.function.BiConsumer;
 
-import picklesjar.pickles.ut.core.IllegalTestStateException;
-import picklesjar.pickles.ut.runtime.UnitTestResult;
-import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
+import picklesjar.pickle.ut.core.IllegalTestStateException;
+import picklesjar.pickle.ut.runtime.UnitTestResult;
+import picklesjar.pickle.ut.runtime.UnitTestRuntimeFoundation;
 
 /**
  * 

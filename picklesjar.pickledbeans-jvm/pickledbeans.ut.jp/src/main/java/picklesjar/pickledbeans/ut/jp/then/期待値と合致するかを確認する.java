@@ -4,8 +4,8 @@ import java.util.function.BiConsumer;
 
 import javax.annotation.Nonnull;
 
+import picklesjar.pickle.ut.core.IllegalTestStateException;
 import picklesjar.pickledbeans.ut.then.junit.AssertThatResultIs;
-import picklesjar.pickles.ut.core.IllegalTestStateException;
 import cucumber.api.java.en.Then;
 
 /**

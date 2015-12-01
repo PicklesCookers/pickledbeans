@@ -5,10 +5,10 @@ import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 
-import picklesjar.pickles.ut.core.IllegalTestStateException;
-import picklesjar.pickles.ut.core.PreparedTemporaryKey;
-import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
-import picklesjar.pickles.ut.runtime.UnitTestTemporary;
+import picklesjar.pickle.ut.core.IllegalTestStateException;
+import picklesjar.pickle.ut.core.PreparedTemporaryKey;
+import picklesjar.pickle.ut.runtime.UnitTestRuntimeFoundation;
+import picklesjar.pickle.ut.runtime.UnitTestTemporary;
 
 /**
  * 

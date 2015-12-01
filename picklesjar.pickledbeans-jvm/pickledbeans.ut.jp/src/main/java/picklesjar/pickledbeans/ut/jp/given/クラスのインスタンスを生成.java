@@ -2,8 +2,8 @@ package picklesjar.pickledbeans.ut.jp.given;
 
 import javax.annotation.Nonnull;
 
+import picklesjar.pickle.ut.core.IllegalTestStateException;
 import picklesjar.pickledbeans.ut.given.CreateClassInstance;
-import picklesjar.pickles.ut.core.IllegalTestStateException;
 import cucumber.api.java.en.Given;
 
 public class クラスのインスタンスを生成

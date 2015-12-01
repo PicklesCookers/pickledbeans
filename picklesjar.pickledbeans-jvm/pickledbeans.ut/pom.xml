@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>PickledBeans UT Support</name>
+	<name>PickledBeans for Java UT Support</name>
 	<description></description>
-	<url>https://github.com/PicklesJar/pickledbeans</url>
+	<url>https://github.com/PicklesJar/documents</url>
 
 	<parent>
 		<groupId>picklesjar</groupId>
@@ -16,7 +16,6 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<project.version>0.1</project.version>
 	</properties>
 
 	<build>
