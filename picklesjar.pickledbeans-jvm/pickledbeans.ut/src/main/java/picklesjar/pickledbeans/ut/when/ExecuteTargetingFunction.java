@@ -3,13 +3,13 @@ package picklesjar.pickledbeans.ut.when;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
+import picklesjar.pickle.ut.core.IllegalTestStateException;
+import picklesjar.pickle.ut.core.PreparedTemporaryKey;
+import picklesjar.pickle.ut.core.util.ClassFunctionTarget;
+import picklesjar.pickle.ut.runtime.UnitTestResult;
+import picklesjar.pickle.ut.runtime.UnitTestRuntimeFoundation;
+import picklesjar.pickle.ut.runtime.UnitTestTemporary;
 import picklesjar.pickledbeans.ut.then.AsserThatResultIs;
-import picklesjar.pickles.ut.core.IllegalTestStateException;
-import picklesjar.pickles.ut.core.PreparedTemporaryKey;
-import picklesjar.pickles.ut.core.util.ClassFunctionTarget;
-import picklesjar.pickles.ut.runtime.UnitTestResult;
-import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
-import picklesjar.pickles.ut.runtime.UnitTestTemporary;
 
 /**
  * 

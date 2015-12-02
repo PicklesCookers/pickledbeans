@@ -5,14 +5,14 @@ import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 
-import picklesjar.pickles.ut.core.IllegalMethodQueryException;
-import picklesjar.pickles.ut.core.IllegalTestCodeStateException;
-import picklesjar.pickles.ut.core.IllegalTestStateException;
-import picklesjar.pickles.ut.core.PreparedTemporaryKey;
-import picklesjar.pickles.ut.core.util.ClassFunctionTarget;
-import picklesjar.pickles.ut.core.util.MethodQuery;
-import picklesjar.pickles.ut.runtime.UnitTestRuntimeFoundation;
-import picklesjar.pickles.ut.runtime.UnitTestTemporary;
+import picklesjar.pickle.ut.core.IllegalMethodQueryException;
+import picklesjar.pickle.ut.core.IllegalTestCodeStateException;
+import picklesjar.pickle.ut.core.IllegalTestStateException;
+import picklesjar.pickle.ut.core.PreparedTemporaryKey;
+import picklesjar.pickle.ut.core.util.ClassFunctionTarget;
+import picklesjar.pickle.ut.core.util.MethodQuery;
+import picklesjar.pickle.ut.runtime.UnitTestRuntimeFoundation;
+import picklesjar.pickle.ut.runtime.UnitTestTemporary;
 
 /**
  * 

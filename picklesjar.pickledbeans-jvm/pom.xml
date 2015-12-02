@@ -5,7 +5,7 @@
 
 	<name>PickledBeans for Java</name>
 	<description></description>
-	<url>https://github.com/PicklesJar/pickledbeans</url>
+	<url>https://github.com/PicklesJar/documents</url>
 
 	<groupId>picklesjar</groupId>
 	<artifactId>picklesjar.pickledbeans-jvm</artifactId>
@@ -13,7 +13,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<project.version>0.1</project.version>
+		<project.version>0.1.1</project.version>
 		<test.cucumber.version>1.2.2</test.cucumber.version>
 	</properties>
 
@@ -75,7 +75,7 @@
 		</dependency>
 		<dependency>
 			<groupId>picklesjar</groupId>
-			<artifactId>pickles.ut</artifactId>
+			<artifactId>pickle.ut</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
