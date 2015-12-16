@@ -25,7 +25,7 @@ public abstract class AssertThatResultIs
 	 * 
 	 * @param key
 	 */
-	protected final < T > void executeWithAlias( String alias, T expectedValue ) {
+	public final < T > void executeWithAlias( String alias, T expectedValue ) {
 	
 		UnitTestRuntimeFoundation.then(
 			( BiConsumer< UnitTestResult, T > )

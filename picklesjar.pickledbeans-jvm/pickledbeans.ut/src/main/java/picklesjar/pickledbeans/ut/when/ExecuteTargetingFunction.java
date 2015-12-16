@@ -32,7 +32,7 @@ public abstract class ExecuteTargetingFunction {
 	 * 
 	 * @param args
 	 */
-	protected final void execute( Object... args ) {
+	public final void execute( Object... args ) {
 	
 		UnitTestRuntimeFoundation.when(
 			( BiConsumer< UnitTestResult, UnitTestTemporary > )
@@ -48,7 +48,7 @@ public abstract class ExecuteTargetingFunction {
 	 * @param alias
 	 * @param args
 	 */
-	protected final void executeAndPutTo( String alias, Object... args ) {
+	public final void executeAndPutTo( String alias, Object... args ) {
 	
 		UnitTestRuntimeFoundation.when( alias,
 			( BiFunction< UnitTestTemporary, Object[], Object > )this::execute, args );

@@ -10,12 +10,13 @@
 	<parent>
 		<groupId>picklesjar</groupId>
 		<artifactId>picklesjar.pickledbeans-jvm</artifactId>
-		<version>${project.version}</version>
+		<version>0.1.1</version>
 	</parent>
 	<artifactId>pickledbeans.ut.jp</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>
+		<project.version>0.1.1</project.version>
 	</properties>
 
 	<build>

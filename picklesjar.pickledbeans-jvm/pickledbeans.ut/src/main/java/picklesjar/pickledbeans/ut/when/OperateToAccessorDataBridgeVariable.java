@@ -41,7 +41,7 @@ public abstract class OperateToAccessorDataBridgeVariable {
 	 * 
 	 * @param alias
 	 */
-	protected final void getAndPutTo( String alias ) {
+	public final void getAndPutTo( String alias ) {
 	
 		UnitTestRuntimeFoundation.when(
 			alias,
@@ -68,7 +68,7 @@ public abstract class OperateToAccessorDataBridgeVariable {
 	 * 
 	 * @param arg
 	 */
-	protected final void set( Object arg ) {
+	public final void set( Object arg ) {
 	
 		UnitTestRuntimeFoundation.when(
 			( BiConsumer< UnitTestResult, UnitTestTemporary > )
